@@ -65,6 +65,7 @@
         <Using Include="BTT.Api.Services.Contracts" />
         <Using Include="Microsoft.AspNetCore.Authorization" />
         <Using Include="Microsoft.AspNetCore.OData.Query" />
+        <Using Include="BTT.Api.Data.Repositories.Contracts" />
     </ItemGroup>
 
     <ItemGroup>

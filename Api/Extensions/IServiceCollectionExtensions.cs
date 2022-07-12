@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 using BTT.Api;
 using BTT.Api.Models.Account;
 using BTT.Api.Services.Implementations;
+using BTT.Api.Data.Repositories.Contracts;
+using BTT.Api.Data.Repositories.Implementations;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -166,5 +168,10 @@ public static class IServiceCollectionExtensions
                     }
                 });
         }
+    }
+
+    public static void AddCustomServices(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     }
 }

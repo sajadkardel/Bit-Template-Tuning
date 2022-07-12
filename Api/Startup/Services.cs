@@ -92,6 +92,8 @@ public static class Services
 
         services.AddHealthChecks(env, configuration);
 
+        services.AddCustomServices();
+
         var fluentEmailServiceBuilder = services.AddFluentEmail(appSettings.EmailSettings.DefaulFromEmail, appSettings.EmailSettings.DefaultFromName)
             .AddRazorRenderer();
 
