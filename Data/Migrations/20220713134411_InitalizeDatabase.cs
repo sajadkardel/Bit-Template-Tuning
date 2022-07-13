@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BTT.Api.Migrations
+namespace BTT.Data.Migrations
 {
-    public partial class InitialSchema : Migration
+    public partial class InitalizeDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

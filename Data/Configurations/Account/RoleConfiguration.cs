@@ -1,6 +1,8 @@
-﻿using BTT.Api.Models.Account;
+﻿using BTT.Data.Models.Account;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BTT.Api.Data.Configurations.Account;
+namespace BTT.Data.Configurations.Account;
 
 public class RoleConfiguration : IEntityTypeConfiguration<Role>
 {

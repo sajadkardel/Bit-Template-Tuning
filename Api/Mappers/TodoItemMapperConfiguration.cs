@@ -1,4 +1,4 @@
-﻿using BTT.Api.Models.TodoItem;
+﻿using BTT.Data.Models.TodoItem;
 using BTT.Shared.Dtos.TodoItem;
 
 namespace BTT.Api.Mappers;

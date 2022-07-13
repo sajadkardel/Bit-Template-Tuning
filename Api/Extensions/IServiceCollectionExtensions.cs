@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using BTT.Api;
-using BTT.Api.Models.Account;
 using BTT.Api.Services.Implementations;
-using BTT.Api.Data.Repositories.Contracts;
-using BTT.Api.Data.Repositories.Implementations;
+using BTT.Data.Models.Account;
+using BTT.Data;
+using BTT.Data.Repositories.Contracts;
+using BTT.Data.Repositories.Implementations;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace BTT.Api.Utilities;
+namespace BTT.Shared.Utilities;
 
 public static class Assert
 {

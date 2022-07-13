@@ -1,4 +1,5 @@
-﻿namespace BTT.Api.Models.Common;
+﻿
+namespace BTT.Data.Models.Common;
 
 public interface IEntity
 {

@@ -1,7 +1,8 @@
-﻿using BTT.Api.Models.Common;
+﻿using BTT.Data.Models.Common;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace BTT.Api.Data.Repositories.Contracts;
+namespace BTT.Data.Repositories.Contracts;
 
 public interface IRepository<TEntity> where TEntity : class, IEntity
 {

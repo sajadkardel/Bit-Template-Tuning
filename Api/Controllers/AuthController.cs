@@ -1,10 +1,9 @@
 ﻿using System.Web;
-using Microsoft.AspNetCore.Hosting.Server;
 using FluentEmail.Core;
 using BTT.Api.Resources;
-using BTT.Api.Models.Account;
+using BTT.Data.Models.Account;
 using BTT.Shared.Dtos.Account;
-using BTT.Api.Models.Emailing;
+using BTT.Data.Models.Emailing;
 
 namespace BTT.Api.Controllers;
 

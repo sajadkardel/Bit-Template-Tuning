@@ -1,4 +1,4 @@
-﻿namespace BTT.Api.Models.Emailing;
+﻿namespace BTT.Data.Models.Emailing;
 
 public class ResetPasswordModel
 {

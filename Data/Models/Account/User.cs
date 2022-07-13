@@ -1,4 +1,6 @@
-﻿namespace BTT.Api.Models.Account;
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace BTT.Data.Models.Account;
 
 public class User : IdentityUser<int>
 {

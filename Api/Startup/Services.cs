@@ -1,5 +1,6 @@
 ﻿using System.IO.Compression;
 using System.Net.Mail;
+using BTT.Data;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.ResponseCompression;

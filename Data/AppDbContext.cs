@@ -1,7 +1,10 @@
-﻿using BTT.Api.Models.Account;
-using BTT.Api.Models.TodoItem;
+﻿using BTT.Data.Models.Account;
+using BTT.Data.Models.TodoItem;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace BTT.Api.Data;
+namespace BTT.Data;
 
 public class AppDbContext : IdentityDbContext<User, Role, int>
 {

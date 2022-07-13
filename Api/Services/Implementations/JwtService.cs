@@ -2,8 +2,8 @@
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.IdentityModel.Tokens;
-using BTT.Api.Models.Account;
 using BTT.Shared.Dtos.Account;
+using BTT.Data.Models.Account;
 
 namespace BTT.Api.Services.Implementations;
 

@@ -1,5 +1,5 @@
 ﻿using MimeTypes;
-using BTT.Api.Models.Account;
+using BTT.Data.Models.Account;
 using SystemFile = System.IO.File;
 
 namespace BTT.Api.Controllers;

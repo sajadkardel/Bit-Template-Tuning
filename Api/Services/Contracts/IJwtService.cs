@@ -1,4 +1,4 @@
-﻿using BTT.Api.Models.Account;
+﻿using BTT.Data.Models.Account;
 using BTT.Shared.Dtos.Account;
 
 namespace BTT.Api.Services.Contracts;
