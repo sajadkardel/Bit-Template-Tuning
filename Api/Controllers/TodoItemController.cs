@@ -9,15 +9,9 @@ namespace BTT.Api.Controllers;
 [ApiController]
 public partial class TodoItemController : ControllerBase
 {
-    private IMapper _mapper = default!;
+    [AutoInject] private IMapper _mapper = default!;
 
-    private IRepository<TodoItem> _repository  = default!;
-
-    public TodoItemController(IRepository<TodoItem> repository, IMapper mapper)
-    {
-        _repository = repository;
-        _mapper = mapper;
-    }
+    [AutoInject] private IRepository<TodoItem> _repository  = default!;
 
     [HttpGet, EnableQuery]
     public IQueryable<TodoItemDto> Get(CancellationToken cancellationToken)
