@@ -1,4 +1,5 @@
 ﻿using BTT.Data.Models.Common;
+using BTT.Data.Models.TodoItem;
 using BTT.Data.Repositories.Contracts;
 using BTT.Shared.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -6,10 +7,10 @@ using System.Linq.Expressions;
 
 namespace BTT.Data.Repositories.Implementations;
 
-public class Repository<TEntity> : IRepository<TEntity>
+public partial class Repository<TEntity> : IRepository<TEntity>
        where TEntity : class, IEntity
 {
-    protected readonly AppDbContext DbContext;
+    public AppDbContext DbContext = default!;
     public DbSet<TEntity> Entities { get; }
     public virtual IQueryable<TEntity> Table => Entities;
     public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
@@ -21,9 +22,9 @@ public class Repository<TEntity> : IRepository<TEntity>
     }
 
     #region Async Method
-    public virtual ValueTask<TEntity> GetByIdAsync(CancellationToken cancellationToken, params object[] ids)
+    public virtual async ValueTask<TEntity?> GetByIdAsync(CancellationToken cancellationToken, params object[] ids)
     {
-        return Entities.FindAsync(ids, cancellationToken);
+        return await Entities.FindAsync(ids, cancellationToken);
     }
 
     public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken, bool saveNow = true)
@@ -76,7 +77,7 @@ public class Repository<TEntity> : IRepository<TEntity>
     #endregion
 
     #region Sync Methods
-    public virtual TEntity GetById(params object[] ids)
+    public virtual TEntity? GetById(params object[] ids)
     {
         return Entities.Find(ids);
     }
@@ -171,7 +172,7 @@ public class Repository<TEntity> : IRepository<TEntity>
         where TProperty : class
     {
         Attach(entity);
-        var reference = DbContext.Entry(entity).Reference(referenceProperty);
+        var reference = DbContext.Entry(entity).Reference(referenceProperty!);
         if (!reference.IsLoaded)
             await reference.LoadAsync(cancellationToken).ConfigureAwait(false);
     }
@@ -180,7 +181,7 @@ public class Repository<TEntity> : IRepository<TEntity>
         where TProperty : class
     {
         Attach(entity);
-        var reference = DbContext.Entry(entity).Reference(referenceProperty);
+        var reference = DbContext.Entry(entity).Reference(referenceProperty!);
         if (!reference.IsLoaded)
             reference.Load();
     }

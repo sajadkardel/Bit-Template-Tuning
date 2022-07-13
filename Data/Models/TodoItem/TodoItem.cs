@@ -3,9 +3,8 @@ using BTT.Data.Models.Common;
 
 namespace BTT.Data.Models.TodoItem;
 
-public class TodoItem
+public class TodoItem : BaseEntity
 {
-    public int Id { get; set; }
     public string? Title { get; set; }
     public DateTimeOffset Date { get; set; }
     public bool IsDone { get; set; }
