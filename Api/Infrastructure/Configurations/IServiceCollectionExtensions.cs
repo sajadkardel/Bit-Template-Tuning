@@ -10,8 +10,9 @@ using BTT.Data.Models.Account;
 using BTT.Data;
 using BTT.Data.Repositories.Contracts;
 using BTT.Data.Repositories.Implementations;
+using BTT.Api.Infrastructure.Configurations;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace BTT.Api.Infrastructure.Configurations;
 
 public static class IServiceCollectionExtensions
 {

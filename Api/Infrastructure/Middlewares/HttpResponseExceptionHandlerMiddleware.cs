@@ -1,8 +1,7 @@
-﻿using BTT.Api.Infrastructure;
-using System.Net;
+﻿using System.Net;
 using System.Reflection;
 
-namespace BTT.Api.Middlewares;
+namespace BTT.Api.Infrastructure.Middlewares;
 
 public class HttpResponseExceptionHandlerMiddleware
 {

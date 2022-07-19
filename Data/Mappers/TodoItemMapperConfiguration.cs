@@ -1,7 +1,8 @@
-﻿using BTT.Data.Models.TodoItem;
+﻿using AutoMapper;
+using BTT.Data.Models.TodoItem;
 using BTT.Shared.Dtos.TodoItem;
 
-namespace BTT.Api.Mappers;
+namespace BTT.Data.Mappers;
 
 public class TodoItemMapperConfiguration : Profile
 {

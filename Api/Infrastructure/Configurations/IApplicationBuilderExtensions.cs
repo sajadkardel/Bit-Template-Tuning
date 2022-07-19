@@ -1,6 +1,6 @@
-﻿using BTT.Api.Middlewares;
+﻿using BTT.Api.Infrastructure.Middlewares;
 
-namespace Microsoft.AspNetCore.Builder;
+namespace BTT.Api.Infrastructure.Configurations;
 
 public static class IApplicationBuilderExtensions
 {

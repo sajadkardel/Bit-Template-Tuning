@@ -1,5 +1,6 @@
 ﻿using System.IO.Compression;
 using System.Net.Mail;
+using BTT.Api.Infrastructure.Configurations;
 using BTT.Data;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.OData;
@@ -83,7 +84,7 @@ public static class Services
 
         services.AddEndpointsApiExplorer();
 
-        services.AddAutoMapper(typeof(Program).Assembly);
+        services.AddAutoMapper(typeof(AppDbContext).Assembly);
 
         services.AddSwaggerGen();
 

@@ -1,4 +1,5 @@
-﻿using HealthChecks.UI.Client;
+﻿using BTT.Api.Infrastructure.Configurations;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Net.Http.Headers;
 

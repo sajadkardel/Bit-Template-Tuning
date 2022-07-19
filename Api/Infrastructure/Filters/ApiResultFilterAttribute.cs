@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace BTT.Api.Infrastructure;
+namespace BTT.Api.Infrastructure.Filters;
 public class ApiResultFilterAttribute : ActionFilterAttribute
 {
     public override void OnResultExecuting(ResultExecutingContext context)
@@ -11,7 +11,7 @@ public class ApiResultFilterAttribute : ActionFilterAttribute
             var apiResult = new ApiResult<object>(true, HttpStatusCode.OK, objectResult.Value);
             context.Result = new JsonResult(apiResult) { StatusCode = objectResult.StatusCode };
         }
-        else if(context.Result is OkObjectResult okObjectResult && okObjectResult.Value is not null)
+        else if (context.Result is OkObjectResult okObjectResult && okObjectResult.Value is not null)
         {
             var apiResult = new ApiResult<object>(true, HttpStatusCode.OK, okObjectResult.Value);
             context.Result = new JsonResult(apiResult) { StatusCode = okObjectResult.StatusCode };

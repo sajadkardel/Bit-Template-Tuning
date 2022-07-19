@@ -1,7 +1,8 @@
-﻿using BTT.Data.Models.Account;
+﻿using AutoMapper;
+using BTT.Data.Models.Account;
 using BTT.Shared.Dtos.Account;
 
-namespace BTT.Api.Mappers;
+namespace BTT.Data.Mappers;
 
 public class AccountMapperConfiguration : Profile
 {

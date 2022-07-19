@@ -1,4 +1,5 @@
-﻿
+﻿using BTT.Api.Infrastructure.Filters;
+
 namespace BTT.Api.Infrastructure;
 
 [ApiController]
