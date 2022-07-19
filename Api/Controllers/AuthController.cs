@@ -4,12 +4,12 @@ using BTT.Api.Resources;
 using BTT.Data.Models.Account;
 using BTT.Shared.Dtos.Account;
 using BTT.Data.Models.Emailing;
+using BTT.Api.Infrastructure;
 
 namespace BTT.Api.Controllers;
 
-[Route("api/[controller]")]
-[ApiController, AllowAnonymous]
-public partial class AuthController : ControllerBase
+[AllowAnonymous]
+public partial class AuthController : BaseController
 {
     [AutoInject] private UserManager<User> _userManager = default!;
 
@@ -24,7 +24,7 @@ public partial class AuthController : ControllerBase
     [AutoInject] private IFluentEmail _fluentEmail = default!;
 
     [HttpPost("[action]")]
-    public async Task SignUp(SignUpRequestDto signUpRequest, CancellationToken cancellationToken)
+    public async Task<IActionResult> SignUp(SignUpRequestDto signUpRequest, CancellationToken cancellationToken)
     {
         var existingUser = await _userManager.FindByNameAsync(signUpRequest.UserName);
 
@@ -51,10 +51,12 @@ public partial class AuthController : ControllerBase
         }
 
         await SendConfirmationEmail(new() { Email = userToAdd.Email }, userToAdd, cancellationToken);
+
+        return Ok();
     }
 
     [HttpPost("[action]")]
-    public async Task SendConfirmationEmail(SendConfirmationEmailRequestDto sendConfirmationEmailRequest, CancellationToken cancellationToken)
+    public async Task<IActionResult> SendConfirmationEmail(SendConfirmationEmailRequestDto sendConfirmationEmailRequest, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByEmailAsync(sendConfirmationEmailRequest.Email);
 
@@ -65,9 +67,11 @@ public partial class AuthController : ControllerBase
             throw new BadRequestException(nameof(ErrorStrings.EmailAlreadyConfirmed));
 
         await SendConfirmationEmail(sendConfirmationEmailRequest, user, cancellationToken);
+
+        return Ok();
     }
 
-    private async Task SendConfirmationEmail(SendConfirmationEmailRequestDto sendConfirmationEmailRequest, User user, CancellationToken cancellationToken)
+    private async Task<IActionResult> SendConfirmationEmail(SendConfirmationEmailRequestDto sendConfirmationEmailRequest, User user, CancellationToken cancellationToken)
     {
         if ((DateTimeOffset.Now - user.ConfirmationEmailRequestedOn) < _appSettings.Value.IdentitySettings.ConfirmationEmailResendDelay)
             throw new TooManyRequestsExceptions(nameof(ErrorStrings.WaitForConfirmationEmailResendDelay));
@@ -99,10 +103,12 @@ public partial class AuthController : ControllerBase
 
         if (!result.Successful)
             throw new ResourceValidationException(result.ErrorMessages.ToArray());
+
+        return Ok();
     }
 
     [HttpPost("[action]")]
-    public async Task SendResetPasswordEmail(SendResetPasswordEmailRequestDto sendResetPasswordEmailRequest
+    public async Task<IActionResult> SendResetPasswordEmail(SendResetPasswordEmailRequestDto sendResetPasswordEmailRequest
         , CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByEmailAsync(sendResetPasswordEmailRequest.Email);
@@ -143,10 +149,12 @@ public partial class AuthController : ControllerBase
 
         if (!result.Successful)
             throw new ResourceValidationException(result.ErrorMessages.ToArray());
+
+        return Ok();
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult> ConfirmEmail(string email, string token)
+    public async Task<IActionResult> ConfirmEmail(string email, string token)
     {
         var user = await _userManager.FindByEmailAsync(email);
 
@@ -167,7 +175,7 @@ public partial class AuthController : ControllerBase
     }
 
     [HttpPost("[action]")]
-    public async Task ResetPassword(ResetPasswordRequestDto resetPasswordRequest)
+    public async Task<IActionResult> ResetPassword(ResetPasswordRequestDto resetPasswordRequest)
     {
         var user = await _userManager.FindByEmailAsync(resetPasswordRequest.Email);
 
@@ -178,6 +186,8 @@ public partial class AuthController : ControllerBase
 
         if (!result.Succeeded)
             throw new ResourceValidationException(result.Errors.Select(e => e.Code).ToArray());
+
+        return Ok();
     }
 
     [HttpPost("[action]")]

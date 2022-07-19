@@ -1,12 +1,11 @@
 ﻿using MimeTypes;
 using BTT.Data.Models.Account;
 using SystemFile = System.IO.File;
+using BTT.Api.Infrastructure;
 
 namespace BTT.Api.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public partial class AttachmentController : ControllerBase
+public partial class AttachmentController : BaseController
 {
     [AutoInject] private IOptionsSnapshot<AppSettings> _appSettings = default!;
 
@@ -17,7 +16,7 @@ public partial class AttachmentController : ControllerBase
     [RequestFormLimits(ValueLengthLimit = int.MaxValue, MultipartBodyLengthLimit = int.MaxValue)]
     [DisableRequestSizeLimit]
     [HttpPost("[action]")]
-    public async Task UploadProfileImage(IFormFile? file, CancellationToken cancellationToken)
+    public async Task<IActionResult> UploadProfileImage(IFormFile? file, CancellationToken cancellationToken)
     {
         if (file is null)
             throw new BadRequestException();
@@ -71,10 +70,12 @@ public partial class AttachmentController : ControllerBase
 
             throw;
         }
+
+        return Ok();
     }
 
     [HttpDelete("[action]")]
-    public async Task RemoveProfileImage()
+    public async Task<IActionResult> RemoveProfileImage()
     {
         var userId = User.GetUserId();
 
@@ -94,11 +95,13 @@ public partial class AttachmentController : ControllerBase
         await _userManager.UpdateAsync(user);
 
         SystemFile.Delete(filePath);
+
+        return Ok();
     }
 
     [HttpGet("[action]")]
     [ResponseCache(NoStore = true)]
-    public async Task<IActionResult> GetProfileImage(CancellationToken cancellationToken)
+    public async Task<PhysicalFileResult> GetProfileImage()
     {
         var userId = User.GetUserId();
 
@@ -111,7 +114,7 @@ public partial class AttachmentController : ControllerBase
             .SingleOrDefault();
 
         if (filePath is null)
-            return new EmptyResult();
+            throw new ResourceNotFoundException();
 
         return PhysicalFile(Path.Combine(_webHostEnvironment.ContentRootPath, filePath),
             MimeTypeMap.GetMimeType(Path.GetExtension(filePath)));

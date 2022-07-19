@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using BTT.Api.Infrastructure;
+using System.Net;
 using System.Reflection;
 
 namespace BTT.Api.Middlewares;
@@ -40,7 +41,10 @@ public class HttpResponseExceptionHandlerMiddleware
             }
 
             context.Response.StatusCode = statusCode;
-            await context.Response.WriteAsJsonAsync(restExceptionPayload);
+
+            var apiResult = new ApiResult<RestExceptionPayload>(false, (HttpStatusCode)statusCode, restExceptionPayload);
+
+            await context.Response.WriteAsJsonAsync(apiResult);
         }
     }
 

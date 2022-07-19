@@ -1,13 +1,11 @@
-﻿using BTT.Data;
+﻿using BTT.Api.Infrastructure;
 using BTT.Data.Models.TodoItem;
 using BTT.Data.Repositories.Contracts;
 using BTT.Shared.Dtos.TodoItem;
 
 namespace BTT.Api.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public partial class TodoItemController : ControllerBase
+public partial class TodoItemController : BaseController
 {
     [AutoInject] private IMapper _mapper = default!;
 
@@ -32,17 +30,19 @@ public partial class TodoItemController : ControllerBase
     }
 
     [HttpPost]
-    public async Task Post(TodoItemDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Post(TodoItemDto dto, CancellationToken cancellationToken)
     {
         var todoItemToAdd = _mapper.Map<TodoItem>(dto);
 
         todoItemToAdd.UserId = User.GetUserId();
 
         await _repository.AddAsync(todoItemToAdd, cancellationToken);
+
+        return Ok();
     }
 
     [HttpPut]
-    public async Task Put(TodoItemDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Put(TodoItemDto dto, CancellationToken cancellationToken)
     {
         var todoItemToUpdate = await _repository.GetByIdAsync(cancellationToken, dto.Id);
 
@@ -52,12 +52,16 @@ public partial class TodoItemController : ControllerBase
         var updatedTodoItem = _mapper.Map(dto, todoItemToUpdate);
 
         await _repository.UpdateAsync(updatedTodoItem, cancellationToken);
+
+        return Ok();
     }
 
     [HttpDelete("{id:int}")]
-    public async Task Delete(int id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
         await _repository.DeleteAsync(new TodoItem { Id = id }, cancellationToken);
+
+        return Ok();
     }
 }
 

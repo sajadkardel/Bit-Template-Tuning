@@ -1,11 +1,10 @@
-﻿using BTT.Data.Models.Account;
+﻿using BTT.Api.Infrastructure;
+using BTT.Data.Models.Account;
 using BTT.Shared.Dtos.Account;
 
 namespace BTT.Api.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public partial class UserController : ControllerBase
+public partial class UserController : BaseController
 {
     [AutoInject] private UserManager<User> _userManager = default!;
 
@@ -25,7 +24,7 @@ public partial class UserController : ControllerBase
     }
 
     [HttpPut]
-    public async Task Update(EditUserDto userDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update(EditUserDto userDto, CancellationToken cancellationToken)
     {
         var userId = User.GetUserId();
 
@@ -40,5 +39,7 @@ public partial class UserController : ControllerBase
         var updatedUser = _mapper.Map(userDto, user);
 
         await _userManager.UpdateAsync(updatedUser);
+
+        return Ok();
     }
 }
