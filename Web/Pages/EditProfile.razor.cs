@@ -6,9 +6,9 @@ public partial class EditProfile
 {
     [AutoInject] private IAuthTokenProvider authTokenProvider = default!;
 
-    [AutoInject] private HttpClient httpClient = default!;
-
     [AutoInject] private IStateService stateService = default!;
+
+    [AutoInject] private IUserSrvice userSrvice = default!;
 
 #if BlazorServer || BlazorHybrid
     [AutoInject] private IConfiguration configuration = default!;
@@ -58,8 +58,7 @@ public partial class EditProfile
 
     private async Task LoadEditProfileData()
     {
-        User = (await stateService.GetValue($"{nameof(EditProfile)}-{nameof(User)}", async () =>
-            await httpClient.GetFromJsonAsync("User/GetCurrentUser", AppJsonContext.Default.UserDto))) ?? new();
+        User = (await stateService.GetValue($"{nameof(EditProfile)}-{nameof(User)}", async () => await userSrvice.GetCurrentUser())) ?? new();
 
         UserToEdit.FullName = User.FullName;
         UserToEdit.BirthDate = User.BirthDate;
@@ -88,7 +87,7 @@ public partial class EditProfile
             User.BirthDate = UserToEdit.BirthDate;
             User.Gender = UserToEdit.Gender;
 
-            await httpClient.PutAsJsonAsync("User", User, AppJsonContext.Default.EditUserDto);
+            await userSrvice.UpdateProfile(User);
 
             EditProfileMessageType = BitMessageBarType.Success;
 

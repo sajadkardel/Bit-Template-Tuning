@@ -26,6 +26,8 @@ public static class IServiceCollectionExtensions
         services.AddAuthorizationCore();
         services.AddScoped<AuthenticationStateProvider, AppAuthenticationStateProvider>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<ITodoItemService, TodoItemService>();
+        services.AddScoped<IUserSrvice, UserSrvice>();
         services.AddScoped(sp => (AppAuthenticationStateProvider)sp.GetRequiredService<AuthenticationStateProvider>());
 
         return services;

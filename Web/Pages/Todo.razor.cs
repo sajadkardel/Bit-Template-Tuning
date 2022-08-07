@@ -4,7 +4,7 @@ namespace BTT.App.Pages;
 
 public partial class Todo
 {
-    [AutoInject] private HttpClient httpClient = default!;
+    [AutoInject] private ITodoItemService todoItemService = default!;
 
     [AutoInject] private IStateService stateService = default!;
 
@@ -42,7 +42,7 @@ public partial class Todo
         IsLoading = true;
         try
         {
-            AllTodoItemList = await stateService.GetValue($"{nameof(Todo)}-{nameof(AllTodoItemList)}", async () => await httpClient.GetFromJsonAsync("TodoItem", AppJsonContext.Default.ListTodoItemDto));
+            AllTodoItemList = await stateService.GetValue($"{nameof(Todo)}-{nameof(AllTodoItemList)}", async () => await todoItemService.GetTodoItems());
             GenarateViewTodoItemList();
         }
         finally
@@ -153,7 +153,7 @@ public partial class Todo
                 Date = DateTimeOffset.Now,
             };
 
-            await httpClient.PostAsJsonAsync("TodoItem", newTodoItem, AppJsonContext.Default.TodoItemDto);
+            await todoItemService.AddTodoItem(newTodoItem);
 
             await LoadTodoItems();
 
@@ -167,7 +167,7 @@ public partial class Todo
 
     private async Task DeleteTodoItem(TodoItemDto todoItem)
     {
-        await httpClient.DeleteAsync($"TodoItem/{todoItem.Id}");
+        await todoItemService.DeleteTodoItem(todoItem);
         AllTodoItemList?.Remove(todoItem);
         GenarateViewTodoItemList();
     }
@@ -179,7 +179,7 @@ public partial class Todo
 
         todoItem.IsInEditMode = false;
 
-        await httpClient.PutAsJsonAsync("TodoItem", todoItem, AppJsonContext.Default.TodoItemDto);
+        await todoItemService.UpdateTodoItem(todoItem);
         GenarateViewTodoItemList();
     }
 }

@@ -4,7 +4,7 @@ namespace BTT.App.Pages;
 
 public partial class ForgotPassword
 {
-    [AutoInject] private HttpClient httpClient = default!;
+    [AutoInject] private IAuthenticationService authService = default!;
 
     public SendResetPasswordEmailRequestDto ForgotPasswordModel { get; set; } = new();
 
@@ -30,7 +30,7 @@ public partial class ForgotPassword
 
         try
         {
-            await httpClient.PostAsJsonAsync("Auth/SendResetPasswordEmail", ForgotPasswordModel, AppJsonContext.Default.SendResetPasswordEmailRequestDto);
+            await authService.SendResetPasswordEmail(ForgotPasswordModel);
 
             ForgotPasswordMessageType = BitMessageBarType.Success;
 

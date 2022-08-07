@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using BTT.Shared.Infra;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
 namespace BTT.Api.Infrastructure.Filters;

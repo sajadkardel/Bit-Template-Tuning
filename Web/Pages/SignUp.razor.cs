@@ -4,7 +4,7 @@ namespace BTT.App.Pages;
 
 public partial class SignUp
 {
-    [AutoInject] private HttpClient httpClient = default!;
+    [AutoInject] private IAuthenticationService authService = default!;
 
     [AutoInject] private NavigationManager navigationManager = default!;
 
@@ -38,7 +38,7 @@ public partial class SignUp
         {
             SignUpModel.Email = SignUpModel.UserName;
 
-            await httpClient.PostAsJsonAsync("Auth/SignUp", SignUpModel, AppJsonContext.Default.SignUpRequestDto);
+            await authService.SignUp(SignUpModel);
 
             IsSignedUp = true;
         }
@@ -71,10 +71,7 @@ public partial class SignUp
 
         try
         {
-            await httpClient.PostAsJsonAsync("Auth/SendConfirmationEmail", new()
-            {
-                Email = SignUpModel.Email
-            }, AppJsonContext.Default.SendConfirmationEmailRequestDto);
+            await authService.SendConfirmEmail(SignUpModel);
 
             SignUpMessageType = BitMessageBarType.Success;
             SignUpMessage = "The confirmation link has been re-sent.";

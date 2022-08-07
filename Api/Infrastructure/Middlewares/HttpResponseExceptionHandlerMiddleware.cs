@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using BTT.Shared.Infra;
+using System.Net;
 using System.Reflection;
 
 namespace BTT.Api.Infrastructure.Middlewares;

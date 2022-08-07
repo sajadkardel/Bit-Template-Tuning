@@ -2,7 +2,7 @@
 
 public partial class EmailConfirmation
 {
-    [AutoInject] private HttpClient httpClient = default!;
+    [AutoInject] private IAuthenticationService authService = default!;
 
     [AutoInject] private NavigationManager navigationManager = default!;
 
@@ -36,10 +36,10 @@ public partial class EmailConfirmation
 
         try
         {
-            await httpClient.PostAsJsonAsync("Auth/SendConfirmationEmail", new()
+            await authService.SendConfirmEmail(new()
             {
-                Email = Email
-            }, AppJsonContext.Default.SendConfirmationEmailRequestDto);
+                Email = Email,
+            });
 
             EmailConfirmationMessageType = BitMessageBarType.Success;
 

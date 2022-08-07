@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace BTT.Api.Infrastructure;
+namespace BTT.Shared.Infra;
 
 public class ApiResult
 {
