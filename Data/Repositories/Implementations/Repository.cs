@@ -1,13 +1,14 @@
 ﻿using BTT.Data.Models.Common;
 using BTT.Data.Models.TodoItem;
 using BTT.Data.Repositories.Contracts;
+using BTT.Shared.Marker;
 using BTT.Shared.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace BTT.Data.Repositories.Implementations;
 
-public partial class Repository<TEntity> : IRepository<TEntity>
+public partial class Repository<TEntity> : IRepository<TEntity>, IScopedDependency
        where TEntity : class, IEntity
 {
     public AppDbContext DbContext = default!;

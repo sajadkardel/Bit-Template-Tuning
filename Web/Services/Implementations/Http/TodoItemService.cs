@@ -1,8 +1,9 @@
 ﻿using BTT.Shared.Dtos.TodoItem;
+using BTT.Shared.Marker;
 
 namespace BTT.App.Services.Implementations;
 
-public partial class TodoItemService : ITodoItemService
+public partial class TodoItemService : ITodoItemService, IScopedDependency
 {
     [AutoInject] private HttpClient _httpClient = default!;
 

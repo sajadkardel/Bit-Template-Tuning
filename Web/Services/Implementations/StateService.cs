@@ -1,11 +1,12 @@
-﻿using System.Runtime.InteropServices;
+﻿using BTT.Shared.Marker;
+using System.Runtime.InteropServices;
 
 namespace BTT.App.Services.Implementations;
 
 // Using this class, persisting the application state on Pre-Rendering mode (explained here: https://docs.microsoft.com/en-us/aspnet/core/blazor/components/prerendering-and-integration#persist-prerendered-state) will be very simple in this multi-mode Template project.
 
 #if (BlazorWebAssembly || BlazorServer) && SSR
-public class StateService : IStateService, IAsyncDisposable
+public class StateService : IStateService, IAsyncDisposable, IScopedDependency
 {
     private PersistingComponentStateSubscription? _subscription;
     private readonly PersistentComponentState _applicationState;
@@ -50,7 +51,7 @@ public class StateService : IStateService, IAsyncDisposable
     }
 }
 #else
-public class StateService : IStateService
+public class StateService : IStateService, IScopedDependency
 {
     public Task<T?> GetValue<T>(string key, Func<Task<T?>> factory)
     {

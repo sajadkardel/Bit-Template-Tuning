@@ -11,6 +11,7 @@ using BTT.Data;
 using BTT.Data.Repositories.Contracts;
 using BTT.Data.Repositories.Implementations;
 using BTT.Api.Infrastructure.Configurations;
+using BTT.Shared.Marker;
 
 namespace BTT.Api.Infrastructure.Configurations;
 
@@ -174,6 +175,19 @@ public static class IServiceCollectionExtensions
 
     public static void AddCustomServices(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.Scan(scan => scan.FromEntryAssembly()
+        .AddClasses(classes => classes.AssignableTo<IScopedDependency>())
+        .AsImplementedInterfaces()
+        .WithScopedLifetime());
+
+        services.Scan(scan => scan.FromEntryAssembly()
+        .AddClasses(classes => classes.AssignableTo<ISingletonDependency>())
+        .AsImplementedInterfaces()
+        .WithSingletonLifetime());
+
+        services.Scan(scan => scan.FromEntryAssembly()
+        .AddClasses(classes => classes.AssignableTo<ITransientDependency>())
+        .AsImplementedInterfaces()
+        .WithTransientLifetime());
     }
 }

@@ -1,9 +1,10 @@
 ﻿using BTT.Shared.Dtos.Account;
+using BTT.Shared.Marker;
 using System.Net.Http;
 
 namespace BTT.App.Services.Implementations;
 
-public partial class AuthenticationService : IAuthenticationService
+public partial class AuthenticationService : IAuthenticationService, IScopedDependency
 {
     [AutoInject] private HttpClient _httpClient = default!;
 

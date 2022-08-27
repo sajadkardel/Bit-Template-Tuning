@@ -1,8 +1,9 @@
 ﻿using BTT.Shared.Dtos.Account;
+using BTT.Shared.Marker;
 
 namespace BTT.App.Services.Implementations;
 
-public partial class UserSrvice : IUserSrvice
+public partial class UserSrvice : IUserSrvice, IScopedDependency
 {
     [AutoInject] private HttpClient _httpClient = default!;
 

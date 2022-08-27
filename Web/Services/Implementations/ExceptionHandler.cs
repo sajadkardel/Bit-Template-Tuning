@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
 using BTT.App.Shared;
+using BTT.Shared.Marker;
 
 namespace BTT.App.Services.Implementations;
 
-public class ExceptionHandler : IExceptionHandler
+public class ExceptionHandler : IExceptionHandler, IScopedDependency
 {
     public void Handle(Exception exception, IDictionary<string, object?>? parameters = null)
     {
