@@ -1,4 +1,4 @@
-﻿namespace BTT.Shared.Marker;
+﻿namespace BTT.Shared.Markers;
 
 public interface IScopedDependency
 {

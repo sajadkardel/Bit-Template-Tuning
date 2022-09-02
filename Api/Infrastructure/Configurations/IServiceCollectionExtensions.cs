@@ -4,14 +4,11 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using BTT.Api;
 using BTT.Api.Services.Implementations;
 using BTT.Data.Models.Account;
 using BTT.Data;
-using BTT.Data.Repositories.Contracts;
-using BTT.Data.Repositories.Implementations;
 using BTT.Api.Infrastructure.Configurations;
-using BTT.Shared.Marker;
+using BTT.Shared.Markers;
 
 namespace BTT.Api.Infrastructure.Configurations;
 

@@ -1,5 +1,5 @@
 ﻿using BTT.App.Services.Implementations;
-using BTT.Shared.Marker;
+using BTT.Shared.Markers;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

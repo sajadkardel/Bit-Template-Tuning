@@ -1,5 +1,5 @@
 ﻿using BTT.Shared.Dtos.Account;
-using BTT.Shared.Marker;
+using BTT.Shared.Markers;
 
 namespace BTT.App.Services.Implementations;
 

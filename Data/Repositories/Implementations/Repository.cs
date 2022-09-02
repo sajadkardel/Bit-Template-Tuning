@@ -1,7 +1,6 @@
 ﻿using BTT.Data.Models.Common;
-using BTT.Data.Models.TodoItem;
 using BTT.Data.Repositories.Contracts;
-using BTT.Shared.Marker;
+using BTT.Shared.Markers;
 using BTT.Shared.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
