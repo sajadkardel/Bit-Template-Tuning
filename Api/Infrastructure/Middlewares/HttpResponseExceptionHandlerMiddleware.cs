@@ -1,4 +1,4 @@
-﻿using BTT.Shared.Infra;
+﻿using BTT.Shared.Infrastructure;
 using System.Net;
 using System.Reflection;
 

@@ -1,4 +1,4 @@
-﻿namespace BTT.Shared.Infra;
+﻿namespace BTT.Shared.Infrastructure;
 
 /// <summary>
 /// https://bitplatform.dev/project-templates/todo-template/getting-started#blazor-modes

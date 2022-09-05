@@ -1,7 +1,6 @@
 ﻿using BTT.Shared.Dtos.Account;
 using BTT.Shared.Dtos.TodoItem;
-using BTT.Shared.Infra;
-using System.Net;
+using BTT.Shared.Infrastructure;
 
 namespace BTT.Shared.Dtos;
 

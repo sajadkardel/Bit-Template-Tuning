@@ -1,4 +1,4 @@
-﻿using BTT.Shared.Infra;
+﻿using BTT.Shared.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
